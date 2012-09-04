@@ -313,3 +313,5 @@ config AB8500_BATTERY_THERM_ON_BATCTRL
 endif # POWER_SUPPLY
 
 source "drivers/power/avs/Kconfig"
+
+source "drivers/power/axp_power/Kconfig"

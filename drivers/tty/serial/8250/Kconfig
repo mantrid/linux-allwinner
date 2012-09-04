@@ -93,6 +93,11 @@ config SERIAL_8250_PNP
 	  This builds standard PNP serial support. You may be able to
 	  disable this feature if you only need legacy serial support.
 
+config SERIAL_8250_SUNXI
+	tristate
+	depends on SERIAL_8250 && (ARCH_SUN4I || ARCH_SUN5I)
+	default SERIAL_8250
+
 config SERIAL_8250_HP300
 	tristate
 	depends on SERIAL_8250 && HP300

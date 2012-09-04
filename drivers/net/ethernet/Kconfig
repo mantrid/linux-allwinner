@@ -178,4 +178,23 @@ source "drivers/net/ethernet/wiznet/Kconfig"
 source "drivers/net/ethernet/xilinx/Kconfig"
 source "drivers/net/ethernet/xircom/Kconfig"
 
+config WEMAC_SUN3I
+	tristate "wemac support(sun3i)"
+	depends on ARCH_SUN3I
+	---help---
+	  Support for softwinner chipset.
+
+	  To compile this driver as a module, choose M here.  The module
+	  will be called wemac.
+
+config WEMAC_SUN4I
+        tristate "wemac support(A1x)"
+        depends on ARCH_SUN4I || ARCH_SUN5I
+	select MII
+        ---help---
+          Support for Softwinner chipset.
+
+          To compile this driver as a module, choose M here.  The module
+          will be called wemac.
+
 endif # ETHERNET

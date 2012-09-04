@@ -45,6 +45,9 @@
 #include <asm/unaligned.h>
 #include <asm/byteorder.h>
 
+#ifdef  CONFIG_USB_SW_SUN4I_HCI
+#include <mach/system.h>
+#endif
 
 #define DRIVER_AUTHOR "Roman Weissgaerber, David Brownell"
 #define DRIVER_DESC "USB 1.1 'Open' Host Controller (OHCI) Driver"
@@ -742,6 +745,32 @@ retry:
 
 /*-------------------------------------------------------------------------*/
 
+#ifdef CONFIG_USB_SW_SUN4I_HCI
+static irqreturn_t sun4i_ohci_isr(struct ohci_hcd *ohci, int ints)
+{
+	enum sw_ic_ver ic_version;
+	u32 status; /* HCRH port status */
+	struct ohci_regs __iomem *regs = ohci->regs;
+
+	ic_version = sw_get_ic_ver();
+
+	if (ic_version != MAGIC_VER_A && ic_version != MAGIC_VER_B)
+		return IRQ_NONE;
+
+	status = ohci_readl(ohci, &regs->roothub.portstatus[0]);
+
+	if ((status & RH_PS_CSC) && (ints & OHCI_INTR_RHSC))
+		printk("ohci_irq: connect status change\n");
+
+	/* clear all irq */
+	ohci_writel(ohci, ints, &regs->intrstatus);
+	/* clear port status */
+	ohci_writel(ohci, status, &regs->roothub.portstatus[0]);
+
+	return IRQ_HANDLED;
+}
+#endif /* CONFIG_USB_SW_SUN4I_HCI */
+
 /* an interrupt happens */
 
 static irqreturn_t ohci_irq (struct usb_hcd *hcd)
@@ -749,6 +778,9 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 	struct ohci_hcd		*ohci = hcd_to_ohci (hcd);
 	struct ohci_regs __iomem *regs = ohci->regs;
 	int			ints;
+#ifdef CONFIG_USB_SW_SUN4I_HCI
+	int			rc;
+#endif
 
 	/* Read interrupt status (and flush pending writes).  We ignore the
 	 * optimization of checking the LSB of hcca->done_head; it doesn't
@@ -756,6 +788,12 @@ static irqreturn_t ohci_irq (struct usb_hcd *hcd)
 	 */
 	ints = ohci_readl(ohci, &regs->intrstatus);
 
+/* FIXME: this situation should be handled somewhat differently Aliaksei K. */
+#ifdef CONFIG_USB_SW_SUN4I_HCI
+	rc = sun4i_ohci_isr(ohci, ints);
+	if (rc == IRQ_HANDLED)
+		return rc;
+#endif
 	/* Check for an all 1's result which is a typical consequence
 	 * of dead, unclocked, or unplugged (CardBus...) devices
 	 */
@@ -1095,6 +1133,15 @@ MODULE_LICENSE ("GPL");
 #define PLATFORM_DRIVER	ohci_hcd_jz4740_driver
 #endif
 
+#ifdef CONFIG_USB_SW_SUN4I_HCI
+#include "ohci_sun4i.c"
+#define	PLATFORM_DRIVER		sw_ohci_hcd_driver
+#endif
+
+#ifdef CONFIG_USB_SW_SUN5I_HCI
+#include "ohci_sun5i.c"
+#define PLATFORM_DRIVER         sw_ohci_hcd_driver
+#endif
 #ifdef CONFIG_USB_OCTEON_OHCI
 #include "ohci-octeon.c"
 #define PLATFORM_DRIVER		ohci_octeon_driver

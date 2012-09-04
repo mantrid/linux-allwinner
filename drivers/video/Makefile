@@ -149,6 +149,14 @@ obj-$(CONFIG_FB_MSM)              += msm/
 obj-$(CONFIG_FB_NUC900)           += nuc900fb.o
 obj-$(CONFIG_FB_JZ4740)		  += jz4740_fb.o
 obj-$(CONFIG_FB_PUV3_UNIGFX)      += fb-puv3.o
+obj-$(CONFIG_SUN3I_FB)		  += sun3i/disp
+obj-$(CONFIG_SUN3I_HDMI)	  += sun3i/hdmi/
+obj-$(CONFIG_SUN4I_FB)		  += sun4i/disp/
+obj-$(CONFIG_SUN4I_LCD)		  += sun4i/lcd/
+obj-$(CONFIG_SUN4I_HDMI)	  += sun4i/hdmi/
+obj-$(CONFIG_SUN5I_FB)		  += sun5i/disp/
+obj-$(CONFIG_SUN5I_LCD)		  += sun5i/lcd/
+obj-$(CONFIG_SUN5I_HDMI)	  += sun5i/hdmi/
 
 # Platform or fallback drivers go here
 obj-$(CONFIG_FB_UVESA)            += uvesafb.o

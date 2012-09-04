@@ -1,0 +1,1 @@
+obj-$(CONFIG_SUN3I_NANDFLASH_TEST) +=nand_test.o

@@ -76,3 +76,5 @@ obj-$(CONFIG_NET_VENDOR_VIA) += via/
 obj-$(CONFIG_NET_VENDOR_WIZNET) += wiznet/
 obj-$(CONFIG_NET_VENDOR_XILINX) += xilinx/
 obj-$(CONFIG_NET_VENDOR_XIRCOM) += xircom/
+obj-$(CONFIG_WEMAC_SUN3I) += sun3i/
+obj-$(CONFIG_WEMAC_SUN4I) += sun4i/

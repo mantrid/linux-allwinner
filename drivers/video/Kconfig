@@ -2444,6 +2444,59 @@ config FB_PUV3_UNIGFX
 	  Choose this option if you want to use the Unigfx device as a
 	  framebuffer device. Without the support of PCI & AGP.
 
+config SUN3I_FB
+	tristate "FB Controller Driver Support(sun3i)"
+	depends on FB && ARCH_SUN3I
+	---help---
+	default m
+
+config SUN3I_HDMI
+	tristate "HDMI Driver Support(sun3i)"
+	depends on SUN3I_FB
+	---help---
+	default m
+
+config SUN4I_FB
+	tristate "DISP Driver Support(sun4i)"
+	depends on FB && ARCH_SUN4I
+	---help---
+	default m
+
+config SUN4I_FB_UMP
+	bool "Enable FB/UMP Integration"
+	depends on MALI && SUN4I_FB=m
+	default y
+
+config SUN4I_LCD
+	tristate "LCD Driver Support(sun4i)"
+	depends on SUN4I_FB
+	---help---
+	default m
+
+config SUN4I_HDMI
+	tristate "HDMI Driver Support(sun4i)"
+	depends on SUN4I_FB
+	---help---
+	default m
+
+config SUN5I_FB
+	tristate "DISP Driver Support(sun5i)"
+	depends on FB && ARCH_SUN5I
+	---help---
+	default m
+
+config SUN5I_LCD
+	tristate "LCD Driver Support(sun5i)"
+	depends on SUN5I_FB
+	---help---
+	default m
+
+config SUN5I_HDMI
+	tristate "HDMI Driver Support(sun5i)"
+	depends on SUN5I_FB
+	---help---
+	default m
+
 source "drivers/video/omap/Kconfig"
 source "drivers/video/omap2/Kconfig"
 source "drivers/video/exynos/Kconfig"

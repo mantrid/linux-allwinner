@@ -43,3 +43,5 @@ obj-$(CONFIG_USB_OCTEON2_COMMON) += octeon2-common.o
 obj-$(CONFIG_MIPS_ALCHEMY)	+= alchemy-common.o
 obj-$(CONFIG_USB_HCD_BCMA)	+= bcma-hcd.o
 obj-$(CONFIG_USB_HCD_SSB)	+= ssb-hcd.o
+obj-$(CONFIG_USB_SW_SUN4I_HCI)	+= sw_hci_sun4i.o
+obj-$(CONFIG_USB_SW_SUN5I_HCI)	+= sw_hci_sun5i.o

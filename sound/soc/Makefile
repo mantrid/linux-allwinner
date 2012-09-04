@@ -27,3 +27,12 @@ obj-$(CONFIG_SND_SOC)	+= sh/
 obj-$(CONFIG_SND_SOC)	+= tegra/
 obj-$(CONFIG_SND_SOC)	+= txx9/
 obj-$(CONFIG_SND_SOC)	+= ux500/
+obj-$(CONFIG_SND_SOC)	+= sun4i/
+obj-$(CONFIG_SND_SOC)	+= sun4i/hdmiaudio/
+obj-$(CONFIG_SND_SOC)	+= sun4i/spdif/
+obj-$(CONFIG_SND_SOC)	+= sun4i/i2s/
+obj-$(CONFIG_SND_SOC)	+= sun5i/
+obj-$(CONFIG_SND_SOC)	+= sun5i/hdmiaudio/
+obj-$(CONFIG_SND_SOC)	+= sun5i/spdif/
+obj-$(CONFIG_SND_SOC)	+= sun5i/i2s/
+

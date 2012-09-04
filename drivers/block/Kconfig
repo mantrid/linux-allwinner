@@ -30,6 +30,30 @@ config BLK_DEV_FD
 	  To compile this driver as a module, choose M here: the
 	  module will be called floppy.
 
+config SUN3I_NANDFLASH
+	depends on BLOCK && ARCH_SUN3I
+	tristate "SUN3I Nandflash Driver"
+	---help---
+	  Nand flash driver for SUN3I
+
+config SUN3I_NANDFLASH_TEST
+	depends on SUN3I_NANDFLASH && ARCH_SUN3I
+	tristate "SUN3I Nandflash Test Driver "
+	---help---
+	  Nand flash test driver for SUN3I
+
+config SUN4I_NANDFLASH
+        depends on BLOCK && ARCH_SUN4I
+        tristate "SUN4I Nandflash Driver"
+        ---help---
+          Nand flash driver for SUN4I
+
+config SUN5I_NANDFLASH
+	depends on BLOCK && ARCH_SUN5I
+	tristate "Nandflash Driver for A12/A13"
+	---help---
+	  Nand flash driver for A12/A13
+
 config AMIGA_FLOPPY
 	tristate "Amiga floppy support"
 	depends on AMIGA

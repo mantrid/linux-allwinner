@@ -986,6 +986,48 @@ config ARCH_OMAP
 	help
 	  Support for TI's OMAP platform (OMAP1/2/3/4).
 
+config ARCH_SUN3I
+	bool "Allwinner SUN3I Platform"
+	select PLAT_SUNXI
+	select CPU_ARM926T
+	select ARM_AMBA
+	select HAVE_CLK
+	select ARM_VIC
+	# select COMMON_CLKDEV
+	select ICST
+	select GENERIC_CLOCKEVENTS
+	help
+	  This enables support for Allwinner Technology Co., Ltd F20 SoC
+	  based systems
+
+config ARCH_SUN4I
+	bool "AllWinner SUN4I Platform"
+	select PLAT_SUNXI
+	select CPU_V7
+	select ARM_AMBA
+	select HAVE_CLK
+	select CLKSRC_MMIO
+	select GENERIC_CLOCKEVENTS
+	select ARCH_HAS_CPUFREQ
+	select ARM_L1_CACHE_SHIFT_6
+	help
+	  This enables support for Allwinner Technology Co., Ltd A10 SoC
+	  based systems
+
+config ARCH_SUN5I
+        bool "AllWinner SUN5I Platform"
+	select PLAT_SUNXI
+        select CPU_V7
+        select ARM_AMBA
+        select HAVE_CLK
+        select CLKSRC_MMIO
+        select GENERIC_CLOCKEVENTS
+        select ARCH_HAS_CPUFREQ
+        select ARM_L1_CACHE_SHIFT_6
+        help
+          This enables support for Allwinner Technology Co., Ltd A12/A13 SoC
+	  based systems
+
 config PLAT_SPEAR
 	bool "ST SPEAr"
 	select ARM_AMBA
@@ -1153,6 +1195,16 @@ config PLAT_PXA
 
 config PLAT_VERSATILE
 	bool
+
+config PLAT_SUNXI
+	bool
+
+if PLAT_SUNXI
+source "arch/arm/plat-sunxi/Kconfig"
+source "arch/arm/mach-sun3i/Kconfig"
+source "arch/arm/mach-sun4i/Kconfig"
+source "arch/arm/mach-sun5i/Kconfig"
+endif
 
 config ARM_TIMER_SP804
 	bool
